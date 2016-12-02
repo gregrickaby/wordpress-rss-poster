@@ -301,7 +301,7 @@ class RssPosterOptionsPage {
 	public function rssposter_options_page() {
 		?>
 		<form action='options.php' method='post'>
-		<h1>RSS Poster</h1>
+		<h1><?php esc_html_e( 'RSS Poster', 'rssposter' ); ?></h1>
 		<?php
 			settings_fields( 'rssposter_options_page' );
 			do_settings_sections( 'rssposter_options_page' );

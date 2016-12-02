@@ -100,7 +100,7 @@ function rssposter_rss_to_post( $args = array() ) {
 		$rss_feed_post_status = ( $options['rssposter_feed_post_status'] ) ? $options['rssposter_feed_post_status'] : 'draft';
 	}
 
-	// Sest new post defaults.
+	// Set new post defaults.
 	// https://developer.wordpress.org/reference/functions/wp_insert_post/#parameters.
 	$defaults = array(
 		'comment_status'        => '',
@@ -238,7 +238,7 @@ function rssposter_set_fetch_interval() {
 
 	// No schedule? Bail!
 	if ( ! $schedule ) {
-		return __( 'Sorry, I cannot locate a schedule! Try saving the settings again.', 'rssposter' );
+		return esc_html__( 'Sorry, I cannot locate a schedule! Try saving the settings again.', 'rssposter' );
 	}
 
 	// Add the new schedule.
@@ -261,7 +261,7 @@ function rssposter_get_post_recurrence_option() {
 
 	// If we have settings, use `em.
 	if ( empty( $options ) ) {
-		return __( 'Sorry, I can\'t seem to find a schedule.', 'rssposter' );
+		return esc_html__( 'Sorry, I can\'t seem to find a schedule.', 'rssposter' );
 	}
 
 	// Set a schedule.
