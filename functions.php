@@ -29,9 +29,9 @@ function rssposter_get_feed( $args = array() ) {
 
 	// If we have settings, use `em.
 	if ( is_array( $options ) ) {
-		$rss_feed_name = ( $options['rss_feed_name'] ) ? $options['rss_feed_name'] : '';
+		$rss_feed_name = ( $options['rssposter_feed_name'] ) ? $options['rssposter_feed_name'] : '';
 		$rss_feed_schedule = ( $options['rssposter_feed_schedule'] ) ? $options['rssposter_feed_schedule'] * HOUR_IN_SECONDS : 4;
-		$rss_feed_url = ( $options['rss_feed_url'] ) ? $options['rss_feed_url'] : '';
+		$rss_feed_url = ( $options['rssposter_feed_url'] ) ? $options['rssposter_feed_url'] : '';
 	}
 
 	// Setup defaults.
@@ -69,7 +69,7 @@ function rssposter_get_feed( $args = array() ) {
 
 		// If this fails, alert the user and bail.
 		if ( empty( $data ) ) {
-			return esc_htmlesc_html__( 'Bummer. I\'m unable to save the RSS feed. Please try again later.', 'rssposter' );
+			return esc_html__( 'Bummer. I\'m unable to save the RSS feed. Please try again later.', 'rssposter' );
 		}
 
 		// Save the data to the database.
@@ -132,17 +132,12 @@ function rssposter_rss_to_post( $args = array() ) {
 	// Parse args.
 	$args = wp_parse_args( $args, $defaults );
 
-	// There's no URL, bail.
-	if ( empty( $args['rss_feed_url'] ) ) {
-		return esc_html__( 'Hey there good looking. I need a RSS feed URL before I can move forward.', 'rssposter' );
-	}
-
 	// Fetch the RSS feed.
 	$data = rssposter_get_feed();
 
 	// No data? Bail!
 	if ( empty( $data ) ) {
-		return esc_html__( 'Ugh. There doesn\'t seem to be any data in the RSS feed', 'rssposter' );
+		return esc_html__( 'Ugh. There doesn\'t seem to be any data in the RSS feed.', 'rssposter' );
 	}
 
 	// Instantiate the DOMDocument class.
