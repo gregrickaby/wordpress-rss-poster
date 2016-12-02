@@ -26,7 +26,6 @@ register_activation_hook( __FILE__, 'rssposter_activate' );
 register_deactivation_hook( __FILE__, 'rssposter_deactivate' );
 
 // Plugin hooks.
-add_action( 'rssposter_schedule', 'rssposter_rss_to_post' );
 add_action( 'wp', 'rssposter_set_fetch_interval' );
 
 // Plugin filters.

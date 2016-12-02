@@ -246,14 +246,10 @@ function rssposter_set_fetch_interval() {
 		return __( 'Sorry, I cannot locate a schedule! Try saving the settings again.', 'rssposter' );
 	}
 
-	// Get the timestamp for the next event.
-	$timestamp = wp_next_scheduled( 'rssposter_schedule' );
-
-	// Remove the existing schedule.
-	wp_unschedule_event( $timestamp, 'rssposter_schedule' );
-
 	// Add the new schedule.
-	wp_schedule_event( time(), $schedule, 'rssposter_schedule' );
+	if ( ! wp_next_scheduled( 'rssposter_schedule' ) ) {
+		wp_schedule_event( time(), $schedule, 'rssposter_schedule' );
+	}
 }
 
 /**
@@ -311,6 +307,7 @@ function rssposter_get_post_recurrence_option() {
  * @since 1.0.0
  */
 function rssposter_activate() {
+	add_action( 'rssposter_schedule', 'rssposter_rss_to_post' );
 }
 
 /**
