@@ -8,7 +8,7 @@
 
 /**
  * Plugin Name: RSS Poster
- * Plugin URI: https://github.com/gregrickaby/rss-poster
+ * Plugin URI: https://github.com/gregrickaby/wordpress-rss-poster
  * Description: Create posts in WordPress from an RSS feed.
  * Author: Greg Rickaby
  * Version: 1.0.0
