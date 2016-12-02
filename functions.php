@@ -73,7 +73,7 @@ function rssposter_get_feed( $args = array() ) {
 		}
 
 		// Save the data to the database.
-		set_transient( $transient_key, $data, absint( $args['$rss_feed_schedule'] ) * HOUR_IN_SECONDS );
+		set_transient( $transient_key, $data, absint( $args['rss_feed_schedule'] ) * HOUR_IN_SECONDS );
 	}
 
 	// Return feed data.
@@ -181,8 +181,19 @@ function rssposter_rss_to_post( $args = array() ) {
 			'post_title'    => wp_strip_all_tags( $feed[ $i ]['feed_title'] ),
 		);
 
-		// Insert the feed data into a post and save to database.
-		wp_insert_post( $rss_to_post );
+		// Look for duplicates.
+		$duplicates = new WP_Query( array(
+			'post_status'            => 'any',
+			'title'                  => $rss_to_post['post_title'],
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+		) );
+
+		// No duplicate was found...
+		if ( false === $duplicates->have_posts() ) {
+			wp_insert_post( $rss_to_post ); // Finally, create a new post!
+		}
 	}
 }
 
