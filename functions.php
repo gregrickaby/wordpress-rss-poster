@@ -89,11 +89,6 @@ function rssposter_get_feed( $args = array() ) {
  */
 function rssposter_rss_to_post( $args = array() ) {
 
-	// This is all for nothing if this class isn't available.
-	if ( ! class_exists( 'DOMDocument' ) ) {
-		return esc_html__( 'My apologies, but I\'m unable to load the PHP DOMDocument class. Please contact your systems administrator.', 'rssposter' );
-	}
-
 	// Check for plugin settings.
 	$options = get_option( 'rssposter_settings' );
 
@@ -105,7 +100,7 @@ function rssposter_rss_to_post( $args = array() ) {
 		$rss_feed_post_status = ( $options['rssposter_feed_post_status'] ) ? $options['rssposter_feed_post_status'] : 'draft';
 	}
 
-	// Post defaults.
+	// Sest new post defaults.
 	// https://developer.wordpress.org/reference/functions/wp_insert_post/#parameters.
 	$defaults = array(
 		'comment_status'        => '',
